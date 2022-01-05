@@ -4,7 +4,7 @@
       Connect your wallet above to mint new NFTs.
     </NotifyError>
     <NotifyError v-if="error" class="mt-5">
-      Uh oh something went wrong - {{ error }}. See console for more details.
+      Uh oh something went wrong - {{ error }}. 
     </NotifyError>
     <NotifyInfo v-if="isLoading" class="mt-5">Sit tight...</NotifyInfo>
   </div>

@@ -1,22 +1,15 @@
 <template>
   <div>
-    <NotifyWarning class="mt-5" v-if="chosenNFTType === 'print'">
-      (!) Minting Standard Editions requires 1) that you have the Master Edition in your wallet and
-      2) that the max supply cap isn't hit. Read more
-      <a
-        href="https://docs.metaplex.com/about/terminology#master-edition"
-        target="_blank"
-        class="nes-text is-primary"
-        >here</a
-      >.
-    </NotifyWarning>
+
 
     <!--master-->
     <form v-if="chosenNFTType === 'master'" class="mt-10" @submit.prevent="mintNewMaster">
       <div class="nes-field">
         <div>
-          <label for="uri">Arweave / IPFS URI:</label
-          ><QuestionMark @click="showModal('tooltipArweave')" />
+          <label for="uri">Arweave </label>
+          <div v-if="isConnected">you are connected</div>
+
+          <div>{{snapshot}}</div>
         </div>
         <input type="text" id="uri" class="nes-input" v-model="uri" :placeholder="DEFAULTS.URI" />
       </div>
@@ -52,16 +45,7 @@
           :placeholder="DEFAULTS.MASTER_MINT"
         />
       </div>
-      <div class="nes-field mt-5">
-        <div><label for="updateAuthority">Update Authority (leave blank for default):</label></div>
-        <input
-          type="text"
-          id="updateAuthority"
-          class="nes-input"
-          v-model="updateAuthority"
-          :placeholder="DEFAULTS.UPDATE_AUTHORITY"
-        />
-      </div>
+      
       <button
         class="nes-btn is-primary mt-5"
         :class="{ 'is-disabled': isLoading || !isConnected }"
@@ -99,7 +83,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { PublicKey } from '@solana/web3.js';
-import QuestionMark from '@/components/QuestionMark.vue';
 import { NFTMintEditionFromMaster, NFTMintMaster } from '@/common/NFTmint';
 import useWallet from '@/composables/wallet';
 import NotifyWarning from '@/components/notifications/NotifyWarning.vue';
@@ -115,7 +98,11 @@ import useError from '@/composables/error';
 import ExplorerLink from '@/components/ExplorerLink.vue';
 import StdNotifications from '@/components/StdNotifications.vue';
 import { DEFAULTS } from '@/globals';
+// import snapshot from '@/snapshot-list';
 
+
+
+  
 export default defineComponent({
   components: {
     StdNotifications,
@@ -126,9 +113,10 @@ export default defineComponent({
     LoadingIcon,
     NotifySuccess,
     NotifyWarning,
-    QuestionMark,
+
   },
   setup() {
+  
     const { isConnected, getWallet } = useWallet();
     const { error, clearError, setError, tryConvertToPk } = useError();
 
@@ -154,8 +142,8 @@ export default defineComponent({
     };
 
     // --------------------------------------- master
-    const uri = ref<string | null>(null);
-    const maxSupply = ref<number | null>(null);
+    const uri = ref<string | null>("https://arweave.net/NXYkN31QdQ-tau9VDolThQ9xzQiFF6xzgZSqngtHgv0");
+    const maxSupply = ref<number | null>(1);
     const mintNewMaster = async () => {
       clearPreviousResults();
       isLoading.value = true;
@@ -222,6 +210,7 @@ export default defineComponent({
       isModalVisible,
       showModal,
       hideModal,
+    
     };
   },
 });
