@@ -1,22 +1,5 @@
 <template>
   <div>
-    <div class="nes-container with-title">
-      <p class="title">
-        Type of NFT to mint:
-        <QuestionMark external="https://docs.metaplex.com/about/terminology#master-edition" />
-      </p>
-      <div class="text-gray-400 mt-2 flex justify-around">
-        <label>
-          <input type="radio" class="nes-radio" value="master" v-model="chosenNFTType" />
-          <span>Master Edition</span>
-        </label>
-        <label>
-          <input type="radio" class="nes-radio" value="print" v-model="chosenNFTType" />
-          <span>Standard Edition (Print)</span>
-        </label>
-      </div>
-    </div>
-
     <NotifyWarning class="mt-5" v-if="chosenNFTType === 'print'">
       (!) Minting Standard Editions requires 1) that you have the Master Edition in your wallet and
       2) that the max supply cap isn't hit. Read more
