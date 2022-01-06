@@ -1,10 +1,6 @@
 import { computed, readonly, ref, shallowRef, Ref } from 'vue';
 import {
   getPhantomWallet,
-  getSolflareWallet,
-  getSolflareWebWallet,
-  getSolletExtensionWallet,
-  getSolletWallet,
   Wallet,
   WalletName,
 } from '@solana/wallet-adapter-wallets';
@@ -16,10 +12,6 @@ const walletAdapter = ref<Ref<SignerWalletAdapter | null>>(shallowRef(null));
 
 const walletMapping = {
   Phantom: getPhantomWallet,
-  Sollet: getSolletWallet,
-  'Sollet (Extension)': getSolletExtensionWallet,
-  Solflare: getSolflareWallet,
-  'Solflare (Web)': getSolflareWebWallet,
 };
 
 export default function useWallet() {

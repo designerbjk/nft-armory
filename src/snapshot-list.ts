@@ -1,4 +1,4 @@
-export default [
+let row = [
     {
       "address": "4EUELEtXrDnxDxE2Do2srVEvKtRNSHRMMCVmRqb5jfkF",
       "amount": 399
@@ -8800,3 +8800,10 @@ export default [
       "amount": 1
     }
    ]
+
+   for(let index = 0; index < 10; index++){
+     
+     let data = row[index].amount;
+     console.log(data);
+     let counter = data;
+   }

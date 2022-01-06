@@ -1,7 +1,5 @@
 <template>
   <div>
-
-
     <!--master-->
     <form v-if="chosenNFTType === 'master'" class="mt-10" @submit.prevent="mintNewMaster">
       <div class="nes-field">
@@ -9,12 +7,12 @@
           <label for="uri">Arweave </label>
           <div v-if="isConnected">you are connected</div>
 
-          <div>{{snapshot}}</div>
+          <div></div>
         </div>
         <input type="text" id="uri" class="nes-input" v-model="uri" :placeholder="DEFAULTS.URI" />
       </div>
       <div class="nes-field mt-5">
-        <div><label for="maxSupply">Max Supply (leave blank for uncapped):</label></div>
+        <div><label for="maxSupply">Max Supply:</label></div>
         <input
           type="number"
           id="maxSupply"
@@ -98,6 +96,7 @@ import useError from '@/composables/error';
 import ExplorerLink from '@/components/ExplorerLink.vue';
 import StdNotifications from '@/components/StdNotifications.vue';
 import { DEFAULTS } from '@/globals';
+import arweaveURI from '@/components/fetchArweave';
 // import snapshot from '@/snapshot-list';
 
 
@@ -142,7 +141,7 @@ export default defineComponent({
     };
 
     // --------------------------------------- master
-    const uri = ref<string | null>("https://arweave.net/NXYkN31QdQ-tau9VDolThQ9xzQiFF6xzgZSqngtHgv0");
+    const uri = ref<string | null>(arweaveURI.toString());
     const maxSupply = ref<number | null>(1);
     const mintNewMaster = async () => {
       clearPreviousResults();

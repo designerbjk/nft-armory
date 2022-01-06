@@ -4,18 +4,12 @@
       <select required id="cluster" v-model="chosenCluster">
         <option :value="Cluster.Mainnet">Mainnet</option>
         <option :value="Cluster.Devnet">Devnet</option>
-        <option :value="Cluster.Testnet">Testnet</option>
-        <option :value="Cluster.Localnet">Localnet</option>
       </select>
     </div>
     <div class="nes-select is-dark flex-1">
       <select required id="wallet" v-model="chosenWallet">
         <option class="text-gray-500" :value="null">Choose wallet..</option>
         <option :value="WalletName.Phantom">Phantom</option>
-        <option :value="WalletName.Sollet">Sollet</option>
-        <option :value="WalletName.SolletExtension">Sollet Extension</option>
-        <option :value="WalletName.Solflare">Solflare</option>
-        <option :value="WalletName.SolflareWeb">Solflare Web</option>
       </select>
     </div>
   </div>

@@ -65,7 +65,7 @@
       <div v-else-if="byCreator" class="nes-field">
         <div class="flex">
           <label for="creator"> Creator Address: </label>
-          <QuestionMark @click="showModal('tooltipCreator')" />
+          
         </div>
         <input
           type="text"
@@ -127,7 +127,6 @@ import 'vue-json-pretty/lib/styles.css';
 import { useRoute } from 'vue-router';
 import { INFTParams } from '@/common/helpers/types';
 import useWallet from '@/composables/wallet';
-import QuestionMark from '@/components/QuestionMark.vue';
 import ModalWindow from '@/components/ModalWindow.vue';
 import ContentTooltipCreator from '@/components/content/tooltip/ContentTooltipCreator.vue';
 import useModal from '@/composables/modal';
@@ -137,7 +136,7 @@ import { DEFAULTS } from '@/globals';
 import NotifyInfo from '@/components/notifications/NotifyInfo.vue';
 
 export default defineComponent({
-  components: { NotifyInfo, NotifyError, ContentTooltipCreator, ModalWindow, QuestionMark },
+  components: { NotifyInfo, NotifyError, ContentTooltipCreator, ModalWindow },
   props: {
     isLoading: Boolean,
   },

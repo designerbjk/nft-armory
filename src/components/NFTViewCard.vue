@@ -42,7 +42,7 @@
           <div v-else class="bg-rarity-common p-2 inline-block">
             Common / Rank: {{ n.rarityRank + 1 }} / Score: {{ parseInt(n.rarityScore) }}
           </div>
-          <QuestionMark @click="showModal('tooltipRarity')" class="ml-2 mt-2" />
+         
         </div>
 
         <!--the rest-->
@@ -62,7 +62,7 @@
         </p>
         <div class="flex">
           <button class="nes-btn is-primary" @click="toggleJSON">{ full JSON }</button>
-          <QuestionMark class="text-base ml-2 mt-2" @click="showModal('tooltipJSON')" />
+        
         </div>
       </div>
     </div>
@@ -98,7 +98,7 @@ import { stringifyPubkeysAndBNsInObject } from '@/common/helpers/util';
 import useModal from '@/composables/modal';
 import ModalWindow from '@/components/ModalWindow.vue';
 import ContentTooltipJSON from '@/components/content/tooltip/ContentTooltipJSON.vue';
-import QuestionMark from '@/components/QuestionMark.vue';
+
 import useCopy from '@/composables/copy';
 import ContentTooltipRarity from '@/components/content/tooltip/ContentTooltipRarity.vue';
 
@@ -108,7 +108,7 @@ export default defineComponent({
   },
   components: {
     ContentTooltipRarity,
-    QuestionMark,
+   
     ContentTooltipJSON,
     ModalWindow,
     VueJsonPretty,
