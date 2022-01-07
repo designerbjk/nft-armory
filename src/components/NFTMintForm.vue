@@ -6,11 +6,11 @@
         <div>
           <label for="uri">Arweave </label>
           <div v-if="isConnected">you are connected</div>
-
-          <div></div>
         </div>
         <input type="text" id="uri" class="nes-input" v-model="uri" :placeholder="DEFAULTS.URI" />
       </div>
+
+      <div><input type="text" id="uri" class="nes-input" /></div>
       <div class="nes-field mt-5">
         <div><label for="maxSupply">Max Supply:</label></div>
         <input
@@ -27,7 +27,7 @@
         :disabled="isLoading || !isConnected"
         type="submit"
       >
-        Mint new Master NFT
+        Claim my engine
       </button>
     </form>
 
@@ -43,7 +43,7 @@
           :placeholder="DEFAULTS.MASTER_MINT"
         />
       </div>
-      
+
       <button
         class="nes-btn is-primary mt-5"
         :class="{ 'is-disabled': isLoading || !isConnected }"
@@ -96,12 +96,8 @@ import useError from '@/composables/error';
 import ExplorerLink from '@/components/ExplorerLink.vue';
 import StdNotifications from '@/components/StdNotifications.vue';
 import { DEFAULTS } from '@/globals';
-import arweaveURI from '@/components/fetchArweave';
-// import snapshot from '@/snapshot-list';
+import axios from 'axios';
 
-
-
-  
 export default defineComponent({
   components: {
     StdNotifications,
@@ -112,12 +108,12 @@ export default defineComponent({
     LoadingIcon,
     NotifySuccess,
     NotifyWarning,
-
   },
   setup() {
-  
     const { isConnected, getWallet } = useWallet();
     const { error, clearError, setError, tryConvertToPk } = useError();
+    const userWalletAddress = useWallet();
+    console.log(userWalletAddress);
 
     const chosenNFTType = ref('master');
     const isLoading = ref<boolean>(false);
@@ -141,7 +137,21 @@ export default defineComponent({
     };
 
     // --------------------------------------- master
-    const uri = ref<string | null>(arweaveURI.toString());
+    let walletAddress = `ERz6kx2tyLcvHZqiViYyLwHLrpRvBT4vviTe4VdHusVQ`;
+    let url = `https://api.wallet.pixelracers.io/engineMint/${walletAddress}`;
+
+    const getAddress = async () => {
+      const result = await axios.get(url);
+      const address = result.data[0].arweaveUrl;
+
+      return address;
+    };
+
+    getAddress().then((address) => {
+      console.log(address);
+    });
+
+    const uri = ref<string | null>(`I want to put it here`);
     const maxSupply = ref<number | null>(1);
     const mintNewMaster = async () => {
       clearPreviousResults();
@@ -209,7 +219,8 @@ export default defineComponent({
       isModalVisible,
       showModal,
       hideModal,
-    
+      //get Address
+      getAddress,
     };
   },
 });
