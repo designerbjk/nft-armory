@@ -33,7 +33,7 @@
       title="Wen export??"
       @hide-modal="hideModal('tooltipExport')"
     >
-      <ContentTooltipExport />
+  
     </ModalWindow>
 
     <!--must sit at the very bottom-->
@@ -63,12 +63,10 @@ import useDownload from '@/composables/download';
 import useCopy from '@/composables/copy';
 import NotifyError from '@/components/notifications/NotifyError.vue';
 import ModalWindow from '@/components/ModalWindow.vue';
-import ContentTooltipExport from '@/components/content/tooltip/ContentTooltipExport.vue';
 import useModal from '@/composables/modal';
 
 export default defineComponent({
   components: {
-    ContentTooltipExport,
     ModalWindow,
     NotifyError,
     NFTViewForm,

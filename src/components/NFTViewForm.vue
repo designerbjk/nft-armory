@@ -116,7 +116,7 @@
       title="What's a creator?"
       @hide-modal="hideModal('tooltipCreator')"
     >
-      <ContentTooltipCreator />
+  
     </ModalWindow>
   </div>
 </template>
@@ -128,7 +128,7 @@ import { useRoute } from 'vue-router';
 import { INFTParams } from '@/common/helpers/types';
 import useWallet from '@/composables/wallet';
 import ModalWindow from '@/components/ModalWindow.vue';
-import ContentTooltipCreator from '@/components/content/tooltip/ContentTooltipCreator.vue';
+
 import useModal from '@/composables/modal';
 import useError from '@/composables/error';
 import NotifyError from '@/components/notifications/NotifyError.vue';
@@ -136,7 +136,7 @@ import { DEFAULTS } from '@/globals';
 import NotifyInfo from '@/components/notifications/NotifyInfo.vue';
 
 export default defineComponent({
-  components: { NotifyInfo, NotifyError, ContentTooltipCreator, ModalWindow },
+  components: { NotifyInfo, NotifyError, ModalWindow },
   props: {
     isLoading: Boolean,
   },

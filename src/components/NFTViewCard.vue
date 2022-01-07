@@ -79,38 +79,32 @@
       title="What's this JSON?"
       @hide-modal="hideModal('tooltipJSON')"
     >
-      <ContentTooltipJSON />
+      
     </ModalWindow>
     <ModalWindow
       v-if="isModalVisible('tooltipRarity')"
       title="What is Rarity Score?"
       @hide-modal="hideModal('tooltipRarity')"
     >
-      <ContentTooltipRarity />
+    
     </ModalWindow>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import VueJsonPretty from 'vue-json-pretty';
 import { stringifyPubkeysAndBNsInObject } from '@/common/helpers/util';
 import useModal from '@/composables/modal';
 import ModalWindow from '@/components/ModalWindow.vue';
-import ContentTooltipJSON from '@/components/content/tooltip/ContentTooltipJSON.vue';
-
 import useCopy from '@/composables/copy';
-import ContentTooltipRarity from '@/components/content/tooltip/ContentTooltipRarity.vue';
+
 
 export default defineComponent({
   props: {
     n: Object,
   },
   components: {
-    ContentTooltipRarity,
-    ContentTooltipJSON,
     ModalWindow,
-    VueJsonPretty,
   },
   setup() {
     const isMaster = (editionType: string) => editionType.toLowerCase().includes('master');
