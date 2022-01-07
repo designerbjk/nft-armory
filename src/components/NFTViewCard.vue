@@ -8,18 +8,7 @@
       <img :alt="n.mint" :src="n.metadataExternal.image" />
 
       <div class="ml-5 text-gray-400">
-        <!--edition-->
-        <p
-          v-if="n.editionType && isMaster(n.editionType)"
-          class="bg-blue-100 text-black p-2 inline-block"
-        >
-          {{ n.editionType }}
-        </p>
-        <p v-else-if="n.editionType" class="bg-yellow-100 text-black p-2 inline-block">
-          {{ n.editionType }} #{{ n.editionData.edition }}
-        </p>
-        <p v-else class="bg-gray-100 text-gray-700 p-2 inline-block">Edition Unknown</p>
-
+      
         <!--rarity-->
         <div v-if="n.rarityScore" class="mt-2 text-black flex">
           <div v-if="n.rarityCategory === 'legendary'" class="bg-rarity-legendary p-2 inline-block">
@@ -120,8 +109,7 @@ export default defineComponent({
 
     // --------------------------------------- modal
     const { registerModal, isModalVisible, showModal, hideModal } = useModal();
-    registerModal('tooltipJSON');
-    registerModal('tooltipRarity');
+   
 
     return {
       isMaster,
