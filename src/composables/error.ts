@@ -15,7 +15,7 @@ export default function useError() {
       error.value = new Error('Missing a required field');
       return;
     }
-    if (e.message === 'unable to get metadata json from url null') {
+    if (e.message === 'No more engines to claim') {
       error.value = new Error('Missing URI');
       return;
     }

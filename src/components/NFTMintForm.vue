@@ -4,23 +4,12 @@
     <form v-if="chosenNFTType === 'master'" class="mt-10" @submit.prevent="mintNewMaster">
       <div class="nes-field">
         <div>
-          <label for="uri">Arweave </label>
-          <div v-if="isConnected">you are connected</div>
+       
+          <div v-if="isConnected">Wallet is connected</div>
         </div>
         <input type="text" id="uri" class="nes-input" v-model="uri" :placeholder="DEFAULTS.URI" />
       </div>
 
-      <div><input type="text" id="uri" class="nes-input" v-model="arweaveURL" /></div>
-      <div class="nes-field mt-5">
-        <div><label for="maxSupply">Max Supply:</label></div>
-        <input
-          type="number"
-          id="maxSupply"
-          class="nes-input"
-          v-model="maxSupply"
-          :placeholder="DEFAULTS.MAX_SUPPLY"
-        />
-      </div>
       <button
         class="nes-btn is-primary mt-5"
         :class="{ 'is-disabled': isLoading || !isConnected }"
@@ -68,13 +57,9 @@
     </NotifySuccess>
 
     <!--modals-->
-    <ModalWindow
-      v-if="isModalVisible('tooltipArweave')"
-      title="What's this URI?"
-      @hide-modal="hideModal('tooltipArweave')"
-    >
-      <ContentTooltipArweave />
-    </ModalWindow>
+  
+   
+ 
   </div>
 </template>
 
@@ -90,20 +75,20 @@ import LoadingIcon from '@/components/LoadingIcon.vue';
 import NFTViewCard from '@/components/NFTViewCard.vue';
 import { NFTGet } from '@/common/NFTget';
 import useModal from '@/composables/modal';
-import ModalWindow from '@/components/ModalWindow.vue';
-import ContentTooltipArweave from '@/components/content/tooltip/ContentTooltipArweave.vue';
 import useError from '@/composables/error';
 import ExplorerLink from '@/components/ExplorerLink.vue';
 import StdNotifications from '@/components/StdNotifications.vue';
 import { DEFAULTS } from '@/globals';
 import axios from 'axios';
 
+
+
+
 export default defineComponent({
+  
   components: {
     StdNotifications,
     ExplorerLink,
-    ContentTooltipArweave,
-    ModalWindow,
     NFTViewCard,
     LoadingIcon,
     NotifySuccess,
@@ -143,13 +128,15 @@ export default defineComponent({
     const getAddress = async () => {
       const result = await axios.get(url);
       const address = result.data[0].arweaveUrl;
-
       return address;
     };
 
     const arweaveURL = getAddress().then((address) => {
       return address;
     });
+
+    const userPublicKey = getWallet();
+    
 
     const uri = ref<string | null>();
     const maxSupply = ref<number | null>(1);

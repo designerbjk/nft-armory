@@ -61,7 +61,7 @@
           <span class="text-black">{{ n.splTokenInfo ? n.splTokenInfo.owner : NOT_FOUND }}</span>
         </p>
         <div class="flex">
-          <button class="nes-btn is-primary" @click="toggleJSON">{ full JSON }</button>
+         
         
         </div>
       </div>
@@ -108,7 +108,6 @@ export default defineComponent({
   },
   components: {
     ContentTooltipRarity,
-   
     ContentTooltipJSON,
     ModalWindow,
     VueJsonPretty,
