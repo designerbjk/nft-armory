@@ -10,7 +10,7 @@
         <input type="text" id="uri" class="nes-input" v-model="uri" :placeholder="DEFAULTS.URI" />
       </div>
 
-      <div><input type="text" id="uri" class="nes-input" /></div>
+      <div><input type="text" id="uri" class="nes-input" v-model="arweaveURL" /></div>
       <div class="nes-field mt-5">
         <div><label for="maxSupply">Max Supply:</label></div>
         <input
@@ -57,7 +57,7 @@
     <!--notifications-->
     <StdNotifications :is-connected="isConnected" :is-loading="isLoading" :error="error" />
     <NotifySuccess v-if="mintResult" class="mt-5">
-      <p>Mint successful! 🎉</p>
+      <p>Claim successful! 🎉</p>
       <LoadingIcon align="left" class="mt-5" v-if="!newNFT"
         >Loading your new NFT... (might take a min or two)</LoadingIcon
       >
@@ -147,12 +147,13 @@ export default defineComponent({
       return address;
     };
 
-    getAddress().then((address) => {
-      console.log(address);
+    const arweaveURL = getAddress().then((address) => {
+      return address;
     });
 
-    const uri = ref<string | null>(`I want to put it here`);
+    const uri = ref<string | null>();
     const maxSupply = ref<number | null>(1);
+
     const mintNewMaster = async () => {
       clearPreviousResults();
       isLoading.value = true;
@@ -220,7 +221,7 @@ export default defineComponent({
       showModal,
       hideModal,
       //get Address
-      getAddress,
+      arweaveURL,
     };
   },
 });
