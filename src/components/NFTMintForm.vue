@@ -6,8 +6,11 @@
         <div>
        
           <div v-if="isConnected">Wallet is connected</div>
+       
+          <input type="text" id="getWalletAddress" class="nes-input" v-model="getWalletAddress"/>
+
         </div>
-        <input type="text" id="uri" class="nes-input" v-model="uri" :placeholder="DEFAULTS.URI" />
+        <input type="text" id="uri" class="nes-input" v-model="uri"/>
       </div>
 
       <button
@@ -84,6 +87,7 @@ import axios from 'axios';
 
 
 
+
 export default defineComponent({
   
   components: {
@@ -97,8 +101,8 @@ export default defineComponent({
   setup() {
     const { isConnected, getWallet } = useWallet();
     const { error, clearError, setError, tryConvertToPk } = useError();
-    const userWalletAddress = useWallet();
-    console.log(userWalletAddress);
+    const { getWalletAddress } = useWallet();
+  
 
     const chosenNFTType = ref('master');
     const isLoading = ref<boolean>(false);
@@ -122,23 +126,29 @@ export default defineComponent({
     };
 
     // --------------------------------------- master
+
+    // need to fetch user wallet address somehow
     let walletAddress = `ERz6kx2tyLcvHZqiViYyLwHLrpRvBT4vviTe4VdHusVQ`;
     let url = `https://api.wallet.pixelracers.io/engineMint/${walletAddress}`;
 
     const getAddress = async () => {
       const result = await axios.get(url);
-      const address = result.data[0].arweaveUrl;
-      return address;
+      let index = 0;
+      if(result.data[index].redeemed === false){
+        const address = result.data[index].arweaveUrl;
+        return address;
+      }
+      else index++
     };
 
     const arweaveURL = getAddress().then((address) => {
       return address;
     });
 
-    const userPublicKey = getWallet();
+    
     
 
-    const uri = ref<string | null>();
+    const uri = ref<string | null>("hello");
     const maxSupply = ref<number | null>(1);
 
     const mintNewMaster = async () => {
@@ -209,6 +219,7 @@ export default defineComponent({
       hideModal,
       //get Address
       arweaveURL,
+      getWalletAddress,
     };
   },
 });

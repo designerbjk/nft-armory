@@ -45,11 +45,14 @@ export default defineComponent({
       },
     });
 
+
+
     return {
       Cluster,
       chosenCluster,
       WalletName,
       chosenWallet,
+     
     };
   },
 });
